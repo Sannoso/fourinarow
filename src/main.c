@@ -158,5 +158,8 @@ void process_settings(char *setting, char *value)
 
 void makemove()
 {
+    #ifdef DEBUG
     printf("making my move \n");
+    #endif // DEBUG
+    fprintf(stdout, "place_disc %d\n", 1);
 }
