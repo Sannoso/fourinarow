@@ -18,7 +18,19 @@ struct
 
 int main(int argc, const char *argv[])
 {
-    printf("Hello world!\n");
+    char line[MAX_LINE_LENGTH];
 
-    return 0;
+    #ifdef DEBUG
+    printf("debug-mode\n");
+    freopen("test.in", "r", stdin);
+    #endif // DEBUG
+//    srand(time(NULL)); //seed for random number generator
+
+    while(fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
+    {
+        printf(line);
+    }
+
+
+    return EXIT_SUCCESS;
 }
