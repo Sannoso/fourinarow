@@ -31,3 +31,8 @@
 # Debug files
 *.dSYM/
 *.su
+
+#CodeBlocks project files
+*.cbp
+*.depend
+*.layout
