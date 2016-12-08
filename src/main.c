@@ -28,7 +28,22 @@ int main(int argc, const char *argv[])
 
     while(fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
     {
-        printf(line);
+        if(!strncmp(line, "action ", 7))//action input
+        {
+            printf("Engine asks me to make a move\n");
+            printf(line);
+        }
+        else if (!strncmp(line, "settings ",8)) //update settings
+        {
+            printf("setting the following:\n");
+            printf(line);
+        }
+        else if (!strncmp(line, "update game ", 12))
+        {
+            printf("update on the game namely:\n");
+            printf(line);
+        }
+
     }
 
 
