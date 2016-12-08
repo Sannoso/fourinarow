@@ -18,12 +18,15 @@ struct
 } game_settings;
 
 int process_input(void);
-int makemove(void);
-int process_settings(void);
+void makemove(void);
+void process_settings(char *, char *);
 void initialise();
 
 int main(int argc, const char *argv[])
 {
+    #ifdef DEBUG
+    printf("debug-mode\n");
+    #endif // DEBUG
 //    intialise();
     while(1==1)
     {
@@ -50,7 +53,6 @@ int process_input(void)
     char part[3][MAX_LINE_LENGTH];
 
     #ifdef DEBUG
-    printf("debug-mode\n");
     freopen("test.in", "r", stdin);
     #endif // DEBUG
 //    srand(time(NULL)); //seed for random number generator
@@ -71,13 +73,14 @@ int process_input(void)
             sscanf(&line[7], "%s %s", part[0], part[1]);
             return TRUE;
         }
-        else if (!strncmp(line, "settings ",8)) //update settings
+        else if (!strncmp(line, "settings ",9)) //update settings
         {
             #ifdef DEBUG
             printf("setting the following:\n");
             printf(line);
             #endif // DEBUG
-            process_settings();
+            sscanf(&line[9], "%s %s", part[0], part[1]);
+            process_settings(part[0], part[1]);
             return FALSE;
         }
         else if (!strncmp(line, "update game ", 12))
@@ -92,12 +95,69 @@ int process_input(void)
     return TRUE;
 }
 
-int process_settings()
+void process_settings(char *setting, char *value)
 {
-    printf("processing settings\n");
+    #ifdef DEBUG
+    //printf("processing settings\n");
+    #endif // DEBUG
+    if(!strncmp(setting, "timebank", 8 ))
+    {
+        game_settings.timebank = atoi(value);
+        #ifdef DEBUG
+        printf("timebank set to %d\n", atoi(value));
+        #endif // DEBUG
+        return;
+    }
+    else if(!strncmp(setting, "time_per_move", 13))
+    {
+        game_settings.time_per_move = atoi(value);
+        #ifdef DEBUG
+        printf("time per move set to %d\n", atoi(value));
+        #endif // DEBUG
+        return;
+    }
+    else if(!strncmp(setting, "player_names", 12))
+    {
+        //not interested in player_name, so do nothing
+        return;
+    }
+    else if(!strncmp(setting, "your_bot", 8))
+    {
+        //not interested in player_name, so do nothing
+        return;
+    }
+    else if(!strncmp(setting, "your_botid", 10))
+    {
+        game_settings.botid = atoi(value);
+        #ifdef DEBUG
+        printf("bot ID = %d", atoi(value));
+        #endif // DEBUG
+        return;
+    }
+    else if (!strncmp(setting, "field_columns", 13))
+    {
+        game_settings.field_columns = atoi(value);
+        #ifdef DEBUG
+        printf("amount of field columns = %d", atoi(value));
+        #endif // DEBUG
+        return;
+    }
+    else if (!strncmp(setting, "field_rows", 10))
+    {
+        game_settings.field_rows = atoi(value);
+        #ifdef DEBUG
+        printf("bot ID = %d", atoi(value));
+        #endif // DEBUG
+        return;
+    }
+    else
+    {
+        printf("Unknown setting\n");
+    }
+    return;
 }
 
-int makemove()
+void makemove()
 {
     printf("making my move \n");
 }
