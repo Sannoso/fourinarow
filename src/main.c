@@ -26,7 +26,11 @@ int main(int argc, const char *argv[])
     #endif // DEBUG
 //    srand(time(NULL)); //seed for random number generator
 
+    #ifdef DEBUG
     while(fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
+    #else
+    while(fgets(line, MAX_LINE_LENGTH, stdin) !=NULL)
+    #endif
     {
         if(!strncmp(line, "action ", 7))//action input
         {
