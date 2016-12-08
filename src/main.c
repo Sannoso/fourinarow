@@ -30,22 +30,27 @@ int main(int argc, const char *argv[])
     {
         if(!strncmp(line, "action ", 7))//action input
         {
+            #ifdef DEBUG
             printf("Engine asks me to make a move\n");
             printf(line);
+            #endif // DEBUG
         }
         else if (!strncmp(line, "settings ",8)) //update settings
         {
+            #ifdef DEBUG
             printf("setting the following:\n");
             printf(line);
+            #endif // DEBUG
         }
         else if (!strncmp(line, "update game ", 12))
         {
+            #ifdef DEBUG
             printf("update on the game namely:\n");
             printf(line);
+            #endif // DEBUG
         }
 
     }
-
 
     return EXIT_SUCCESS;
 }
