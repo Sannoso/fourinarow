@@ -27,7 +27,7 @@ int main(int argc, const char *argv[])
     #ifdef DEBUG
     printf("debug-mode\n");
     #endif // DEBUG
-//    intialise();
+    initialise();
     while(1==1)
     {
         int b_makemove = FALSE;
@@ -44,7 +44,9 @@ int main(int argc, const char *argv[])
 
 void initialise()
 {
-    //dunno yet
+    #ifdef DEBUG
+    freopen("test.in", "r", stdin);
+    #endif // DEBUG
 }
 
 int process_input(void)
@@ -52,9 +54,6 @@ int process_input(void)
     char line[MAX_LINE_LENGTH];
     char part[3][MAX_LINE_LENGTH];
 
-    #ifdef DEBUG
-    freopen("test.in", "r", stdin);
-    #endif // DEBUG
 //    srand(time(NULL)); //seed for random number generator
 
     //parse input
@@ -121,24 +120,24 @@ void process_settings(char *setting, char *value)
         //not interested in player_name, so do nothing
         return;
     }
-    else if(!strncmp(setting, "your_bot", 8))
-    {
-        //not interested in player_name, so do nothing
-        return;
-    }
     else if(!strncmp(setting, "your_botid", 10))
     {
         game_settings.botid = atoi(value);
         #ifdef DEBUG
-        printf("bot ID = %d", atoi(value));
+        printf("bot ID = %d\n", atoi(value));
         #endif // DEBUG
+        return;
+    }
+    else if(!strncmp(setting, "your_bot", 8))
+    {
+        //not interested in player_name, so do nothing
         return;
     }
     else if (!strncmp(setting, "field_columns", 13))
     {
         game_settings.field_columns = atoi(value);
         #ifdef DEBUG
-        printf("amount of field columns = %d", atoi(value));
+        printf("amount of field columns = %d\n", atoi(value));
         #endif // DEBUG
         return;
     }
@@ -146,7 +145,7 @@ void process_settings(char *setting, char *value)
     {
         game_settings.field_rows = atoi(value);
         #ifdef DEBUG
-        printf("bot ID = %d", atoi(value));
+        printf("amount of field rows = %d\n", atoi(value));
         #endif // DEBUG
         return;
     }
