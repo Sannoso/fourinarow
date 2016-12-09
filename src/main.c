@@ -35,6 +35,7 @@ int main(int argc, const char *argv[])
         if(b_makemove == TRUE)
         {
             makemove();
+            fflush(stdout);
         }
         //take action after parsing input
         //makemove
@@ -44,6 +45,7 @@ int main(int argc, const char *argv[])
 
 void initialise()
 {
+    srand(time(NULL));
     #ifdef DEBUG
     freopen("test.in", "r", stdin);
     #endif // DEBUG
@@ -91,7 +93,7 @@ int process_input(void)
             return FALSE;
         }
     }
-    return TRUE;
+    return FALSE;
 }
 
 void process_settings(char *setting, char *value)
@@ -162,4 +164,5 @@ void makemove()
     printf("making my move \n");
     #endif // DEBUG
     fprintf(stdout, "place_disc %d\n", 1);
+    //printf("place_disc %d\n", 1);
 }
