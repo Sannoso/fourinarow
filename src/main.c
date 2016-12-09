@@ -163,6 +163,6 @@ void makemove()
     #ifdef DEBUG
     printf("making my move \n");
     #endif // DEBUG
-    fprintf(stdout, "place_disc %d\n", 1);
+    fprintf(stdout, "place_disc %d\n", rand() %7);
     //printf("place_disc %d\n", 1);
 }
